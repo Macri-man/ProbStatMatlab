@@ -24,26 +24,26 @@ close all
 
 format compact
 
-disp(['Code by: Alexander Macri  0384086 SECTION #'])
-disp(['Code by: FULL NAME  STUDENT ID SECTION #'])
-disp(['Code by: FULL NAME  STUDENT ID SECTION #'])
+disp(['Code by: Alexander Macri  0384086 8:00 AM'])
+disp(['Code by: Adam Kimball     0386149 8:00 AM'])
+disp(['Code by: Grissess MacWookie  0000001 6:66 AM'])
 disp([' ']);
 
 %% Process data
 
 dataA = load ( 'dataA.txt' );
-%dataA = xlsread( 'STAT383_Project_data.xlsx',1,'B2:B21');
+%dataA = xlsread('STAT383_Project_data.xlsx',1,'B2:B21');
 Na = size(dataA,1);
 
 dataB = load ( 'dataB.txt' );
-%dataB = xlsread( 'STAT383_Project_data.xlsx',1,'D2:D101');
+%dataB = xlsread('STAT383_Project_data.xlsx',1,'D2:D101');
 Nb = size(dataB,1);
 
 %% Plot the data (dataA)
 
 % (Box plot) For the key parts of the plot, see figure 6.24 in textbook
 
-figure('name','Boxplot for DataA');boxplot(dataA);title ('Boxplot for DataA');ylabel('ohms')
+figure('name','Boxplot for DataA');boxplot(dataA);title ('Boxplot for DataA');ylabel('ohms');
 
 % (Histogram)
 figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');ylabel('Frequency');xlabel('ohms')
@@ -102,23 +102,23 @@ disp([' '])
 
 meanA = sum(dataA)/Na;
 meanB = sum(dataB)/Nb;
-smeanA = sqrt(sum(dataA - meanA)/(Na-1));
-smeanB = sqrt(sum(dataB - meanB)/(Nb-1));
+stdDevA = sqrt((sum(dataA - meanA)^2)/(Na-1));
+stdDevB = sqrt((sum(dataB - meanB)^2)/(Nb-1));
 
 % For confidence level 95% for dataA
-disp(['The two-sided, 95% confidence interval for the sample mean of data set A, is (' num2str(meanA-(tinv(.95,Na-1)*(smeanA/Na))) ', (' num2str(meanA+(tinv(.95,Na-1)*(smeanA/Na))) ')']);
+disp(['The two-sided, 95% confidence interval for the sample mean of data set A, is (' num2str(meanA-(tinv(.95,Na-1)*(stdDevA/Na))) ', ' num2str(meanA+(tinv(.95,Na-1)*(stdDevA/Na))) ')']);
 
 disp([' '])
 % For confidence level 95% for dataB
-disp(['The two-sided, 95% confidence interval for the sample mean of data set B, is (' num2str(meanA-(tinv(.95,Nb-1)*(smeanB/Nb))) ', (' num2str(meanB+(tinv(.95,Nb-1)*(smeanB/Nb))) ')']);
+disp(['The two-sided, 95% confidence interval for the sample mean of data set B, is (' num2str(meanA-(tinv(.95,Nb-1)*(stdDevB/Nb))) ', ' num2str(meanB+(tinv(.95,Nb-1)*(stdDevB/Nb))) ')']);
 
 disp([' '])
 % For confidence level 99% for dataA
-disp(['The two-sided, 99% confidence interval for the sample mean of data set A, is (' num2str(meanA-(tinv(.99,Na-1)*(smeanA/Na))) ', (' num2str(meanA+(tinv(.99,Na-1)*(smeanA/Na))) ')']);
+disp(['The two-sided, 99% confidence interval for the sample mean of data set A, is (' num2str(meanA-(tinv(.99,Na-1)*(stdDevA/Na))) ', ' num2str(meanA+(tinv(.99,Na-1)*(stdDevA/Na))) ')']);
 
 disp([' '])
 % For confidence level 99% for dataB
-disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(meanB-(tinv(.95,Nb-1)*(smeanB/Nb))) ', (' num2str(meanB+(tinv(.99,Nb-1)*(smeanB/Nb))) ')']);
+disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(meanB-(tinv(.95,Nb-1)*(stdDevB/Nb))) ', ' num2str(meanB+(tinv(.99,Nb-1)*(stdDevB/Nb))) ')']);
 
 disp([' '])
 %% Hypothesis Testing
@@ -151,7 +151,8 @@ disp([' '])
 %% Calculate and display (as a probability) the cumulative distribution function for...
 
 % For t = 2.262 with 9 degrees of freedom.
-disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
+p=cdf('t',2.262,9)
+disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(p)]);
 
 %  Hint: To check your code, check that it matches the value in your t-table or Table III in the back of your textbook.
 
@@ -159,11 +160,15 @@ disp([''])
 %% Calculate and display the p-value for ...
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
-disp(['For H0: mu_A = 98.25, the p-value = ' num2str((meanA-98.25)/(smeanA/sqrt(Na)))])
+
+tstarA = (((meanA - 98.25)(sqrt(Na))/(stdDevA));
+
+disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*abs(tstarA))])
 
 disp([''])
 % For the two-sided problem for data B with null hypothesis H0: mu_B = 98.25
-disp(['For H0: mu_B = 98.25, the p-value = ' num2str((meanB-98.25)/(smeanB/sqrt(Nb)))])
+tstarB = (((meanB - 98.25)(sqrt(Nb))/(stdDevB));
+disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*abs(tstarB))])
 
 disp([''])
 %% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why?
@@ -187,6 +192,12 @@ dataC = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91]
 
 % For the two-sided problem with null hypothesis H0: muA - muC = 0
 
+qAC = dataA-dataC;
+dAC = sum(qAC)/Na;
+sdAC = sum(qAC - dAC)^2/(Na-1);
+tstarAC = ((dAC-0)(sqrt(Na)))/(sdAC);
+
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*abs(tstarAC))])
 
 disp([''])
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)?
@@ -209,6 +220,12 @@ dataD = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91;
 
 % For the two-sided problem with null hypothesis H0: muA - muD = 0
 
+qAD = dataA-dataD;
+dAD = sum(qAD)/Na;
+sdAD = sum(qAD - d)^2/(Na-1);
+tstar = ((dAD-0)(sqrt(Na)))/(sdAD);
+
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*abs(tstarAD))])
 
 disp([''])
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)?
