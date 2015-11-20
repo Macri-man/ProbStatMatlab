@@ -151,26 +151,25 @@ disp([' '])
 %% Calculate and display (as a probability) the cumulative distribution function for...
 
 % For t = 2.262 with 9 degrees of freedom.
-p=cdf('t',2.262,9)
-disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(p)]);
+disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
 
 %  Hint: To check your code, check that it matches the value in your t-table or Table III in the back of your textbook.
 
-disp([''])
+disp([' ']);
 %% Calculate and display the p-value for ...
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
+stdDevA = sqrt((sum(dataA - meanA)^2)/(Na-1));
+tstarA = (((meanA - 98.25)*(sqrt(Na))/(stdDevA)));
 
-tstarA = (((meanA - 98.25)(sqrt(Na))/(stdDevA));
+disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('t',0.05,Na-1)))]);
 
-disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*abs(tstarA))])
-
-disp([''])
 % For the two-sided problem for data B with null hypothesis H0: mu_B = 98.25
-tstarB = (((meanB - 98.25)(sqrt(Nb))/(stdDevB));
-disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*abs(tstarB))])
+stdDevB = sqrt((sum(dataB - meanB)^2)/(Nb-1));
+tstarB = (((meanB - 98.25)*sqrt(Nb))/(stdDevB));
+disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('t',0.05,Nb-1)))]);
 
-disp([''])
+disp([' ']);
 %% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why?
 % When you answer this below, include your calculated p-value in addtion to the t statistic.
 % Do this for both dataA and dataB.
@@ -178,11 +177,14 @@ disp([''])
 %  (Display your answer in the command window as before (same format as the
 %  instructions sheet example). Hint: See figure 8.30 in book.
 
+disp(['The absolute value of the t statistic for dataA ' num2str(tstarA)]);
+disp(['The absolute value of the t statistic for dataB ' num2str(tstarB)]);
+
 
 %% Paired, two sided t-test:
 % Imagine that "dataA" is attained by meauring the resistors using a standard
 % ohm meter. However, a new procudure measures the resistance in a much faster
-% way. The data data below (dataC) are the resitances as measured this new way.
+% way. The data below (dataC) are the resitances as measured this new way.
 
 % DO NOT ALTER THIS CELL
 
@@ -195,18 +197,16 @@ dataC = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91]
 qAC = dataA-dataC;
 dAC = sum(qAC)/Na;
 sdAC = sum(qAC - dAC)^2/(Na-1);
-tstarAC = ((dAC-0)(sqrt(Na)))/(sdAC);
+tstarAC = ((dAC-0)*(sqrt(Na)))/(sdAC);
 
-disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*abs(tstarAC))])
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Na-1)))])
 
-disp([''])
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)?
 % 
 %
 %  (Display your answer in the command window as before (same format as the
 %  instructions sheet example).
 
-disp([''])
 %% Un-paired (independent) two-sided t-test:
 % Imagine that "dataA" is using the standard machine to make resistors,
 % while a new machine that is cheaper is being used to to create the data
@@ -220,14 +220,21 @@ dataD = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91;
 
 % For the two-sided problem with null hypothesis H0: muA - muD = 0
 
-qAD = dataA-dataD;
-dAD = sum(qAD)/Na;
-sdAD = sum(qAD - d)^2/(Na-1);
-tstar = ((dAD-0)(sqrt(Na)))/(sdAD);
+Nd = size(dataD,1);
 
-disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*abs(tstarAD))])
+meanA = sum(dataA)/Na;
+meanD = (sum(dataD)/Nd);
 
-disp([''])
+VarA = sum(dataA - meanA)^2/(Na-1);
+VarD = sum(dataD - meanD)^2/(Nd-1);
+
+numor = meanA-meanD-0;
+denom = sqrt((VarA/Na)+(VarD/Nd));
+
+tstarAD = numor/denom;
+
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Nd-1)))])
+
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)?
 % 
 %
@@ -235,7 +242,7 @@ disp([''])
 %  instructions sheet example).
 
 
-disp([''])
+disp([' '])
 %%                  Fitting a Line (paramter estimation)
 %
 % The manager of the resistor plant wishes to investigate how the plant's
@@ -265,7 +272,6 @@ dataY = Y';
 % You CANNOT use "polyfit" or the like. You must use the equations we
 % discuss in class (12.2 in the book).
 
-disp([''])
 
 MM = (((Na * sum(dataA.*dataY)) - (sum(dataA) * sum(dataY)))/((Na*sum(dataA.^2)) - sum(dataA)^2));
 
