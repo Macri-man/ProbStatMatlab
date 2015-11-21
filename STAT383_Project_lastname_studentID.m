@@ -78,7 +78,7 @@ fprintf(['The data in the second data set, B, seems to be positively skewed. \n'
     'This is also illustrated by the histogram, visually, having a long tail to the right, which is indicative of a positive skew.']);
 
 fprintf('\n\n');
-%% Sample Analysis [NOT DONE]
+%% Sample Analysis [DONE]
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
 % command "median(data)" and the mode seen from the data or use the MatLab
@@ -95,11 +95,8 @@ diffB = dataB - meanB;
 varA = (sum(diffA.^2))/(Na-1);
 varB = (sum(diffB.^2))/(Nb-1);
 
-stdDevA = sqrt((sum(diffA.^2))/(Na-1));
-stdDevB = sqrt((sum(diffB.^2))/(Nb-1));
-
-sampleStdDevA = sqrt((sum(diffA.^2))/(Na));
-sampleStdDevB = sqrt((sum(diffB.^2))/(Nb));
+sampleStdDevA = sqrt((sum(diffA.^2))/(Na-1));
+sampleStdDevB = sqrt((sum(diffB.^2))/(Nb-1));
 
 disp(['For data set A:']);
 disp(['The sample mean is ' num2str(meanA)]);
@@ -124,7 +121,7 @@ disp([' ']);
 %
 %                   tinv(1-alpha,v)
 %
-%% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for... [NOT DONE]
+%% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for... [DONE]
 %  (Display it in the same format as the instructions sheet.)
 
 disp([' '])
@@ -198,7 +195,7 @@ disp([' '])
 % NOTE: Both cdf functions calculate P(X < x). In other words, the function
 % is defined from -inf to x. Typically you need P(X > x) for the p-value.
 
-%% Calculate and display (as a probability) the cumulative distribution function for... [NOT DONE]
+%% Calculate and display (as a probability) the cumulative distribution function for... [DONE]
 
 % For t = 2.262 with 9 degrees of freedom.
 disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
@@ -206,7 +203,7 @@ disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
 %  Hint: To check your code, check that it matches the value in your t-table or Table III in the back of your textbook.
 
 disp([' ']);
-%% Calculate and display the p-value for ... [NOT DONE]
+%% Calculate and display the p-value for ... [DONE]
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
 tstarA = (((meanA - 98.25)*(sqrt(Na))/(sampleStdDevA)));
@@ -227,14 +224,14 @@ disp([' ']);
 %  instructions sheet example). Hint: See figure 8.30 in book.
 
 disp(['The absolute value of the t statistic for dataA ' num2str(abs(tstarA))]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Na-1)) ]);
-disp(['and therefore with a significance level of 5%, we [do something] the null.']);
+disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Na-1)) ]);
+disp(['and therefore with a significance level of 5%, we REJECT the null.']);
 
 disp([' ']);
 
 disp(['The absolute value of the t statistic for dataB ' num2str(abs(tstarB))]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
-disp(['and therefore with a significance level of 5%, we [do something] the null.']);
+disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Nb-1)) ]);
+disp(['and therefore with a significance level of 5%, we REJECT the null.']);
 
 disp([' ']);
 %% Paired, two sided t-test: [NOT DONE]
@@ -250,9 +247,9 @@ dataC = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91]
 
 % For the two-sided problem with null hypothesis H0: muA - muC = 0
 
-qAC = dataA-dataC;
-dAC = sum(qAC)/Na;
-sdAC = sum(qAC - dAC)^2/(Na-1);
+diffAC = dataA-dataC;
+dAC = sum(diffAC)/Na;
+sdAC = sqrt(sum(diffAC.^2)/(Na-1));
 tstarAC = ((dAC-0)*(sqrt(Na)))/(sdAC);
 
 disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarAC,Na-1)))])
@@ -264,7 +261,7 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarA
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Na-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
 disp([' ']);
@@ -294,7 +291,7 @@ denom = sqrt((VarA/Na)+(VarD/Nd));
 
 tstarAD = numor/denom;
 
-disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',1-0.05,Nd-1)))])
+disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',1-0.05,Nd-1)))])
 
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [NOT DONE]
 % 
@@ -303,7 +300,7 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',1-0.05
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAD)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Nb-1)) ]);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
 disp([' '])
@@ -331,21 +328,31 @@ s = G*randn(1,Na);      % uncertainty in time measurements (standard deviation)
 Y = m*dataA' + b + s;
 dataY = Y';
 
-%% Calculate and display the slope and intercept [NOT DONE]
+%% Calculate and display the slope and intercept [DONE]
 % using dataA as the independent varible (X) and dataY as the dependent variable (Y).
 % You CANNOT use "polyfit" or the like. You must use the equations we
 % discuss in class (12.2 in the book).
 
+sumA = sum(dataA);
+sumY = sum(dataY);
 
-MM = (((Na * sum(dataA.*dataY)) - (sum(dataA) * sum(dataY)))/((Na*sum(dataA.^2)) - sum(dataA)^2));
+sumAsquared = sum(dataA.^2);
+sumYsquared = sum(dataY.^2);
 
-BB = (sum(dataY)/Na)-(MM*(sum(dataA)/Na));
+sumYA = sum(dataA.*dataY);
+
+MMnumor = ((Na * sumYA) - (sumA * sumY));
+MMdenom = (Na*sumAsquared) - sum(dataA)^2;
+
+MM = MMnumor/MMdenom;
+
+BB = (sumY/Na) - (MM*(sumA/Na));
 
 disp(['Calculated slope and intercept']);
 disp(['~B1 = ' num2str(MM)]);
 disp(['~B0 = ' num2str(BB)]);
 
-%% Plot fitted regression line against data [NOT DONE]
+%% Plot fitted regression line against data [DONE]
 % The following code is how I display line and data. It doesn't mean you
 % HAVE to use it.....
 %
