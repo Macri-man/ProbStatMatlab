@@ -56,11 +56,11 @@ figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');y
 fprintf(['The Data Set, A, is Bimodal \n ', ...
     'because [description]']);
 
-disp([' '])
+disp([' ']);
 %% Plot the data (dataB)[Done]
 
 % (Box plot) For the key parts of the plot, see figure 6.24
-figure('name','Boxplot for DataB');boxplot(dataB);title ('Boxplot for DataA');ylabel('ohms')
+figure('name','Boxplot for DataB');boxplot(dataB);title ('Boxplot for DataB');ylabel('ohms')
 
 % (Histogram)
 figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');ylabel('Frequency');xlabel('ohms')
@@ -74,7 +74,7 @@ figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');y
 fprintf(['The Data Set, B, is [insert thing here] skewed \n ', ...
     'because [description]']);
 
-disp([' '])
+disp([' ']);
 
 %% Sample Analysis [NOT DONE]
 % For each data set, calculate the sample mean, mode, median and sample
@@ -110,7 +110,7 @@ disp(['The sample mean is ' num2str(meanB)]);
 disp(['The mode is ' num2str(mode(dataB))]);
 disp(['The median is ' num2str(median(dataB))]);
 disp(['The sample standard deviation is ' num2str(sampleStdDevB)]);
-
+disp([' ']);
 
 %% Confidence Intervals [NOT DONE]
 % For this part, it will be useful to use the MatLab function "tinv". This
@@ -128,11 +128,13 @@ disp(['The sample standard deviation is ' num2str(sampleStdDevB)]);
 disp([' '])
 
 % For confidence level 95% for dataA
+sovernA = sampleStdDevA/sqrt(Na);
+sovernB = sampleStdDevB/sqrt(Nb);
 
 t95A = tinv(.95,Na-1);
-lower95A = meanA-(t95A*(sampleStdDevA/Na));
+lower95A = meanA-(t95A*sovernA);
 
-upper95A = meanA+(t95A*(sampleStdDevA/Na));
+upper95A = meanA+(t95A*sovernA);
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set A, is (' num2str(lower95A) ', ' num2str(upper95A) ')']);
 
@@ -140,9 +142,9 @@ disp([' '])
 % For confidence level 95% for dataB
 
 t95B = tinv(.95,Nb-1);
-lower95B = meanB-(t95B*(sampleStdDevB/Nb));
+lower95B = meanB-(t95B*sovernB);
 
-upper95B = meanB+(t95B*(sampleStdDevB/Nb));
+upper95B = meanB+(t95B*sovernB);
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set B, is (' num2str(lower95B) ', ' num2str(upper95B) ')']);
 
@@ -150,9 +152,9 @@ disp([' '])
 % For confidence level 99% for dataA
 
 t99A = tinv(.99,Na-1);
-lower99A = meanA-(t99A*(sampleStdDevA/Na));
+lower99A = meanA-(t99A*sovernA);
 
-upper99A = meanA+(t99A*(sampleStdDevA/Na));
+upper99A = meanA+(t99A*sovernA);
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set A, is (' num2str(lower99A) ', ' num2str(upper99A) ')']);
 
@@ -160,9 +162,9 @@ disp([' '])
 % For confidence level 99% for dataB
 
 t99B = tinv(.99,Nb-1);
-lower99B = meanB-(t95B*(sampleStdDevB/Nb));
+lower99B = meanB-(t99B*sovernB);
 
-upper99B = meanB+(t99B*(sampleStdDevB/Nb));
+upper99B = meanB+(t99B*sovernB);
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(lower99B) ', ' num2str(upper99B) ')']);
 
@@ -207,12 +209,12 @@ disp([' ']);
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
 tstarA = (((meanA - 98.25)*(sqrt(Na))/(sampleStdDevA)));
 
-disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanA,sampleStdDevA)))]);
+disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('t',tstarA,Na-1)))]);
 
 % For the two-sided problem for data B with null hypothesis H0: mu_B = 98.25
 tstarB = (((meanB - 98.25)*sqrt(Nb))/(sampleStdDevB));
 
-disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanB,sampleStdDevB)))]);
+disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('t',tstarB,Nb-1)))]);
 
 disp([' ']);
 %% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why? [NOT DONE]
@@ -222,18 +224,17 @@ disp([' ']);
 %  (Display your answer in the command window as before (same format as the
 %  instructions sheet example). Hint: See figure 8.30 in book.
 
-disp(['The absolute value of the t statistic for dataA ' num2str(tstarA)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Na-1)) ]);
+disp(['The absolute value of the t statistic for dataA ' num2str(abs(tstarA))]);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Na-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
+disp([' ']);
 
-disp(['The absolute value of the t statistic for dataB ' num2str(tstarB)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Nb-1)) ]);
+disp(['The absolute value of the t statistic for dataB ' num2str(abs(tstarB))]);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
-
-
-
+disp([' ']);
 %% Paired, two sided t-test: [NOT DONE]
 % Imagine that "dataA" is attained by meauring the resistors using a standard
 % ohm meter. However, a new procudure measures the resistance in a much faster
@@ -252,7 +253,7 @@ dAC = sum(qAC)/Na;
 sdAC = sum(qAC - dAC)^2/(Na-1);
 tstarAC = ((dAC-0)*(sqrt(Na)))/(sdAC);
 
-disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Na-1)))])
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarAC,Na-1)))])
 
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)? [NOT DONE]
 % 
@@ -261,10 +262,10 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,N
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Nb-1)) ]);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
-
+disp([' ']);
 %% Un-paired (independent) two-sided t-test: [NOT DONE]
 % Imagine that "dataA" is using the standard machine to make resistors,
 % while a new machine that is cheaper is being used to to create the data
@@ -291,7 +292,7 @@ denom = sqrt((VarA/Na)+(VarD/Nd));
 
 tstarAD = numor/denom;
 
-disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Nd-1)))])
+disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',1-0.05,Nd-1)))])
 
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [NOT DONE]
 % 
@@ -336,7 +337,12 @@ dataY = Y';
 
 MM = (((Na * sum(dataA.*dataY)) - (sum(dataA) * sum(dataY)))/((Na*sum(dataA.^2)) - sum(dataA)^2));
 
-BB = (sum(dataY)/Na);
+BB = (sum(dataY)/Na)-(MM*(sum(dataA)/Na));
+
+disp(['Calculated slope and intercept']);
+disp(['~B1 = ' num2str(MM)]);
+disp(['~B0 = ' num2str(BB)]);
+
 %% Plot fitted regression line against data [NOT DONE]
 % The following code is how I display line and data. It doesn't mean you
 % HAVE to use it.....
@@ -357,3 +363,4 @@ figure('name','This is my fit line. MM and BB are estimates for slope and interc
 xlabel('Resistance(ohms)');
 ylabel('Electricity Usage(Watts)');
 title('Best Linear Fit')
+
