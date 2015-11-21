@@ -87,8 +87,29 @@ disp([' '])
 meanA = sum(dataA)/Na;
 meanB = sum(dataB)/Nb;
 
+diffA = dataA - meanA;
+diffB = dataB - meanB;
 
+varA = (sum(diffA.^2))/(Na-1);
+varB = (sum(diffB.^2))/(Nb-1);
 
+stdDevA = sqrt((sum(diffA.^2))/(Na-1));
+stdDevB = sqrt((sum(diffB.^2))/(Nb-1));
+
+sampleStdDevA = sqrt((sum(diffA.^2))/(Na));
+sampleStdDevB = sqrt((sum(diffB.^2))/(Nb));
+
+disp(['For data set A:']);
+disp(['The sample mean is ' num2str(meanA)]);
+disp(['The mode is ' num2str(mode(dataA))]);
+disp(['The median is ' num2str(median(dataA))]);
+disp(['The sample standard deviation is ' num2str(sampleStdDevA)]);
+disp([' ']);
+disp(['For data set B:']);
+disp(['The sample mean is ' num2str(meanB)]);
+disp(['The mode is ' num2str(mode(dataB))]);
+disp(['The median is ' num2str(median(dataB))]);
+disp(['The sample standard deviation is ' num2str(sampleStdDevB)]);
 
 
 %% Confidence Intervals
@@ -105,18 +126,6 @@ meanB = sum(dataB)/Nb;
 %  (Display it in the same format as the instructions sheet.)
 
 disp([' '])
-
-diffA = dataA - meanA;
-diffB = dataB - meanB;
-
-varA = (sum(diffA.^2))/(Na-1);
-varB = (sum(diffB.^2))/(Nb-1);
-
-stdDevA = sqrt((sum(diffA.^2))/(Na-1));
-stdDevB = sqrt((sum(diffB.^2))/(Nb-1));
-
-sampleStdDevA = sqrt((sum(diffA.^2))/(Na));
-sampleStdDevB = sqrt((sum(diffB.^2))/(Nb));
 
 % For confidence level 95% for dataA
 
