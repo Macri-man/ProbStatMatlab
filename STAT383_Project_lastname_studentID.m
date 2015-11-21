@@ -24,10 +24,10 @@ close all
 
 format compact
 
-disp(['Code by: Alexander Macri  0384086 8:00 AM'])
-disp(['Code by: Adam Kimball     0386149 8:00 AM'])
-disp(['Code by: Grissess MacWookie  0000001 6:66 AM'])
-disp([' ']);
+disp('Code by: Alexander Macri  0384086 8:00 AM')
+disp('Code by: Adam Kimball     0386149 8:00 AM')
+disp('Code by: Grissess MacWookie  0000001 6:66 AM')
+disp(' ');
 
 %% Process data [Done]
 
@@ -53,12 +53,12 @@ figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');y
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The data in the first data set, A, seems to be Bimodal. \n' ... 
+disp(['The data in the first data set, A, seems to be Bimodal. \n' ... 
     'This is illustrated by the fact that the box plot indicates a very symmetric relationship to either side of the median line\n' ... 
     '(from min to q1 and q3 to max, as well as q1 to median and median to q3),\n' ...
     'in addition to the histogram, visually, having two apparent distinct distribution curves, which is indicative of bimodality.']);
+disp('\n\n');
 
-fprintf('\n\n');
 %% Plot the data (dataB)[Done]
 
 % (Box plot) For the key parts of the plot, see figure 6.24
@@ -73,11 +73,11 @@ figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');y
 %Is the data skewed? Why or why not.. Use your plots to support your
 %analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The data in the second data set, B, seems to be positively skewed. \n' ... 
+disp(['The data in the second data set, B, seems to be positively skewed. \n' ... 
     'This is illustrated by the fact that in the boxplot, the length of the horizontal line from the median to Q3 is much longer than from Q1 to the median.\n' ...
     'This is also illustrated by the histogram, visually, having a long tail to the right, which is indicative of a positive skew.']);
+disp('\n\n');
 
-fprintf('\n\n');
 %% Sample Analysis [DONE]
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
@@ -98,18 +98,18 @@ varB = (sum(diffB.^2))/(Nb-1);
 sampleStdDevA = sqrt((sum(diffA.^2))/(Na-1));
 sampleStdDevB = sqrt((sum(diffB.^2))/(Nb-1));
 
-disp(['For data set A:']);
+disp('For data set A:');
 disp(['The sample mean is ' num2str(meanA)]);
 disp(['The mode is ' num2str(mode(dataA))]);
 disp(['The median is ' num2str(median(dataA))]);
 disp(['The sample standard deviation is ' num2str(sampleStdDevA)]);
-disp([' ']);
-disp(['For data set B:']);
+disp(' ');
+disp('For data set B:');
 disp(['The sample mean is ' num2str(meanB)]);
 disp(['The mode is ' num2str(mode(dataB))]);
 disp(['The median is ' num2str(median(dataB))]);
 disp(['The sample standard deviation is ' num2str(sampleStdDevB)]);
-disp([' ']);
+disp(' ');
 
 %% Confidence Intervals [NOT DONE]
 % For this part, it will be useful to use the MatLab function "tinv". This
@@ -124,7 +124,7 @@ disp([' ']);
 %% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for... [DONE]
 %  (Display it in the same format as the instructions sheet.)
 
-disp([' '])
+disp(' ')
 
 % For confidence level 95% for dataA
 sovernA = sampleStdDevA/sqrt(Na);
@@ -136,8 +136,8 @@ lower95A = meanA-(t95A*sovernA);
 upper95A = meanA+(t95A*sovernA);
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set A, is (' num2str(lower95A) ', ' num2str(upper95A) ')']);
+disp(' ')
 
-disp([' '])
 % For confidence level 95% for dataB
 
 t95B = tinv(.95,Nb-1);
@@ -146,8 +146,8 @@ lower95B = meanB-(t95B*sovernB);
 upper95B = meanB+(t95B*sovernB);
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set B, is (' num2str(lower95B) ', ' num2str(upper95B) ')']);
+disp(' ')
 
-disp([' '])
 % For confidence level 99% for dataA
 
 t99A = tinv(.99,Na-1);
@@ -156,8 +156,8 @@ lower99A = meanA-(t99A*sovernA);
 upper99A = meanA+(t99A*sovernA);
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set A, is (' num2str(lower99A) ', ' num2str(upper99A) ')']);
+disp(' ')
 
-disp([' '])
 % For confidence level 99% for dataB
 
 t99B = tinv(.99,Nb-1);
@@ -166,8 +166,8 @@ lower99B = meanB-(t99B*sovernB);
 upper99B = meanB+(t99B*sovernB);
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(lower99B) ', ' num2str(upper99B) ')']);
+disp(' ')
 
-disp([' '])
 %% Hypothesis Testing [NOT DONE]
 %
 % For this part, it will be useful to use the MatLab function "cdf". This
@@ -199,10 +199,11 @@ disp([' '])
 
 % For t = 2.262 with 9 degrees of freedom.
 disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
+disp(' ');
 
 %  Hint: To check your code, check that it matches the value in your t-table or Table III in the back of your textbook.
 
-disp([' ']);
+disp(' ');
 %% Calculate and display the p-value for ... [DONE]
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
@@ -214,8 +215,8 @@ disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('t',tstarA,Na-1)))
 tstarB = (((meanB - 98.25)*sqrt(Nb))/(sampleStdDevB));
 
 disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('t',tstarB,Nb-1)))]);
+disp(' ');
 
-disp([' ']);
 %% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why? [NOT DONE]
 % When you answer this below, include your calculated p-value in addtion to the t statistic.
 % Do this for both dataA and dataB.
@@ -225,15 +226,14 @@ disp([' ']);
 
 disp(['The absolute value of the t statistic for dataA ' num2str(abs(tstarA))]);
 disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Na-1)) ]);
-disp(['and therefore with a significance level of 5%, we REJECT the null.']);
+disp('and therefore with a significance level of 5%, we REJECT the null.');
 
-disp([' ']);
+disp(' ');
 
 disp(['The absolute value of the t statistic for dataB ' num2str(abs(tstarB))]);
 disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Nb-1)) ]);
-disp(['and therefore with a significance level of 5%, we REJECT the null.']);
-
-disp([' ']);
+disp('and therefore with a significance level of 5%, we REJECT the null.');
+disp(' ');
 %% Paired, two sided t-test: [NOT DONE]
 % Imagine that "dataA" is attained by meauring the resistors using a standard
 % ohm meter. However, a new procudure measures the resistance in a much faster
@@ -261,10 +261,9 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarA
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Na-1)) ]);
-disp(['and therefore with a significance level of 5%, we [do something] the null.']);
-
-disp([' ']);
+disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp('and therefore with a significance level of 5%, we [do something] the null.');
+disp(' ');
 %% Un-paired (independent) two-sided t-test: [NOT DONE]
 % Imagine that "dataA" is using the standard machine to make resistors,
 % while a new machine that is cheaper is being used to to create the data
@@ -301,9 +300,8 @@ disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',1-0
 
 disp(['The absolute value of the t statistic ' num2str(tstarAD)]);
 disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
-disp(['and therefore with a significance level of 5%, we [do something] the null.']);
-
-disp([' '])
+disp('and therefore with a significance level of 5%, we [do something] the null.');
+disp(' ')
 %%                  Fitting a Line (paramter estimation) [NOT DONE]
 %
 % The manager of the resistor plant wishes to investigate how the plant's
@@ -348,7 +346,7 @@ MM = MMnumor/MMdenom;
 
 BB = (sumY/Na) - (MM*(sumA/Na));
 
-disp(['Calculated slope and intercept']);
+disp('Calculated slope and intercept');
 disp(['~B1 = ' num2str(MM)]);
 disp(['~B0 = ' num2str(BB)]);
 
