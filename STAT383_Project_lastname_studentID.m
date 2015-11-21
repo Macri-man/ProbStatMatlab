@@ -76,7 +76,7 @@ fprintf(['The Data Set, B, is [insert thing here] skewed \n ', ...
 
 disp([' '])
 
-%% Sample Analysis
+%% Sample Analysis [NOT DONE]
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
 % command "median(data)" and the mode seen from the data or use the MatLab
@@ -89,7 +89,7 @@ meanB = sum(dataB)/Nb;
 
 
 
-%% Confidence Intervals
+%% Confidence Intervals [NOT DONE]
 % For this part, it will be useful to use the MatLab function "tinv". This
 % will calculate the critical value for a random variable with a student-t
 % distribution given v, which is the degrees of freedom.
@@ -99,7 +99,7 @@ meanB = sum(dataB)/Nb;
 %
 %                   tinv(1-alpha,v)
 %
-%% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for...
+%% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for... [NOT DONE]
 %  (Display it in the same format as the instructions sheet.)
 
 disp([' '])
@@ -156,7 +156,7 @@ upper99B = meanB+(t99B*(sampleStdDevB/Nb));
 disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(lower99B) ', ' num2str(upper99B) ')']);
 
 disp([' '])
-%% Hypothesis Testing
+%% Hypothesis Testing [NOT DONE]
 %
 % For this part, it will be useful to use the MatLab function "cdf". This
 % function will calculate the cumulative distribution function for a
@@ -183,7 +183,7 @@ disp([' '])
 % NOTE: Both cdf functions calculate P(X < x). In other words, the function
 % is defined from -inf to x. Typically you need P(X > x) for the p-value.
 
-%% Calculate and display (as a probability) the cumulative distribution function for...
+%% Calculate and display (as a probability) the cumulative distribution function for... [NOT DONE]
 
 % For t = 2.262 with 9 degrees of freedom.
 disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
@@ -191,7 +191,7 @@ disp(['The T cdf for t = 2.262 is P(T<t) = ' num2str(cdf('t',2.262,9))]);
 %  Hint: To check your code, check that it matches the value in your t-table or Table III in the back of your textbook.
 
 disp([' ']);
-%% Calculate and display the p-value for ...
+%% Calculate and display the p-value for ... [NOT DONE]
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
 tstarA = (((meanA - 98.25)*(sqrt(Na))/(sampleStdDevA)));
@@ -204,7 +204,7 @@ tstarB = (((meanB - 98.25)*sqrt(Nb))/(sampleStdDevB));
 disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanB,sampleStdDevB)))]);
 
 disp([' ']);
-%% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why?
+%% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why? [NOT DONE]
 % When you answer this below, include your calculated p-value in addtion to the t statistic.
 % Do this for both dataA and dataB.
 %
@@ -223,7 +223,7 @@ disp(['and therefore with a significance level of 5%, we [do something] the null
 
 
 
-%% Paired, two sided t-test:
+%% Paired, two sided t-test: [NOT DONE]
 % Imagine that "dataA" is attained by meauring the resistors using a standard
 % ohm meter. However, a new procudure measures the resistance in a much faster
 % way. The data below (dataC) are the resitances as measured this new way.
@@ -232,7 +232,7 @@ disp(['and therefore with a significance level of 5%, we [do something] the null
 
 dataC = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91];
 
-%% Calculate and display the p-value for ...
+%% Calculate and display the p-value for ... [NOT DONE]
 
 % For the two-sided problem with null hypothesis H0: muA - muC = 0
 
@@ -243,7 +243,7 @@ tstarAC = ((dAC-0)*(sqrt(Na)))/(sdAC);
 
 disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Na-1)))])
 
-%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)?
+%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)? [NOT DONE]
 % 
 %
 %  (Display your answer in the command window as before (same format as the
@@ -254,7 +254,7 @@ disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Nb-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
 
-%% Un-paired (independent) two-sided t-test:
+%% Un-paired (independent) two-sided t-test: [NOT DONE]
 % Imagine that "dataA" is using the standard machine to make resistors,
 % while a new machine that is cheaper is being used to to create the data
 % below (dataD).
@@ -263,7 +263,7 @@ disp(['and therefore with a significance level of 5%, we [do something] the null
 
 dataD = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91;95;97;101;99;98;101];
 
-%% Calculate and display the p-value for (do NOT assume a pooled variance) ...
+%% Calculate and display the p-value for (do NOT assume a pooled variance) ... [NOT DONE]
 
 % For the two-sided problem with null hypothesis H0: muA - muD = 0
 
@@ -282,7 +282,7 @@ tstarAD = numor/denom;
 
 disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',0.05,Nd-1)))])
 
-%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)?
+%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [NOT DONE]
 % 
 %
 %  (Display your answer in the command window as before (same format as the
@@ -293,7 +293,7 @@ disp(['[is whatever than] the critical value, ' num2str(cdf('t',0.05,Nb-1)) ]);
 disp(['and therefore with a significance level of 5%, we [do something] the null.']);
 
 disp([' '])
-%%                  Fitting a Line (paramter estimation)
+%%                  Fitting a Line (paramter estimation) [NOT DONE]
 %
 % The manager of the resistor plant wishes to investigate how the plant's
 % electricity usage depends upon the value of the resistor produced.
@@ -317,7 +317,7 @@ s = G*randn(1,Na);      % uncertainty in time measurements (standard deviation)
 Y = m*dataA' + b + s;
 dataY = Y';
 
-%% Calculate and display the slope and intercept
+%% Calculate and display the slope and intercept [NOT DONE]
 % using dataA as the independent varible (X) and dataY as the dependent variable (Y).
 % You CANNOT use "polyfit" or the like. You must use the equations we
 % discuss in class (12.2 in the book).
@@ -326,7 +326,7 @@ dataY = Y';
 MM = (((Na * sum(dataA.*dataY)) - (sum(dataA) * sum(dataY)))/((Na*sum(dataA.^2)) - sum(dataA)^2));
 
 BB = (sum(dataY)/Na);
-%% Plot fitted regression line against data
+%% Plot fitted regression line against data [NOT DONE]
 % The following code is how I display line and data. It doesn't mean you
 % HAVE to use it.....
 %

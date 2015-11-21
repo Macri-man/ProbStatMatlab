@@ -76,13 +76,16 @@ fprintf(['The Data Set, B, is [insert thing here] skewed \n ', ...
 
 disp([' '])
 
-%% Sample Analysis
+%% Sample Analysis [NOT DONE]
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
 % command "median(data)" and the mode seen from the data or use the MatLab
 % command "mode(data)". However, the sample mean and sample standard
 % deviation MUST be calculated using the formulas from the book, i.e.
 % do not use software commands like "mean(X)" but you can still use "sum".
+
+meanA = sum(dataA)/Na;
+meanB = sum(dataB)/Nb;
 
 
 
@@ -100,9 +103,6 @@ disp([' '])
 %  (Display it in the same format as the instructions sheet.)
 
 disp([' '])
-
-meanA = sum(dataA)/Na;
-meanB = sum(dataB)/Nb;
 
 diffA = dataA - meanA;
 diffB = dataB - meanB;
