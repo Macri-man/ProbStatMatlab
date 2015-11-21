@@ -48,15 +48,17 @@ figure('name','Boxplot for DataA');boxplot(dataA);title ('Boxplot for DataA');yl
 % (Histogram)
 figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');ylabel('Frequency');xlabel('ohms')
 
-%% Questions [NOT DONE]
+%% Questions [Done]
 
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The Data Set, A, is Bimodal \n ', ...
-    'because [description]']);
+fprintf(['The data in the first data set, A, seems to be Bimodal. \n' ... 
+    'This is illustrated by the fact that the box plot indicates a very symmetric relationship to either side of the median line\n' ... 
+    '(from min to q1 and q3 to max, as well as q1 to median and median to q3),\n' ...
+    'in addition to the histogram, visually, having two apparent distinct distribution curves, which is indicative of bimodality.']);
 
-disp([' ']);
+fprintf('\n\n');
 %% Plot the data (dataB)[Done]
 
 % (Box plot) For the key parts of the plot, see figure 6.24
@@ -66,16 +68,16 @@ figure('name','Boxplot for DataB');boxplot(dataB);title ('Boxplot for DataB');yl
 figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');ylabel('Frequency');xlabel('ohms')
 
 
-%% Questions [NOT DONE]
+%% Questions [Done]
 
 %Is the data skewed? Why or why not.. Use your plots to support your
 %analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The Data Set, B, is [insert thing here] skewed \n ', ...
-    'because [description]']);
+fprintf(['The data in the second data set, B, seems to be positively skewed. \n' ... 
+    'This is illustrated by the fact that in the boxplot, the length of the horizontal line from the median to Q3 is much longer than from Q1 to the median.\n' ...
+    'This is also illustrated by the histogram, visually, having a long tail to the right, which is indicative of a positive skew.']);
 
-disp([' ']);
-
+fprintf('\n\n');
 %% Sample Analysis [NOT DONE]
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
