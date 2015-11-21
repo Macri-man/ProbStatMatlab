@@ -53,7 +53,7 @@ figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');y
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The Data Set, A, is [insert thing here] skewed \n ', ...
+fprintf(['The Data Set, A, is normal (Bellshaped) \n ', ...
     'because [description]']);
 
 disp([' '])
@@ -82,6 +82,8 @@ disp([' '])
 % command "mode(data)". However, the sample mean and sample standard
 % deviation MUST be calculated using the formulas from the book, i.e.
 % do not use software commands like "mean(X)" but you can still use "sum".
+
+
 
 
 
