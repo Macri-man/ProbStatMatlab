@@ -29,7 +29,7 @@ disp(['Code by: Adam Kimball     0386149 8:00 AM'])
 disp(['Code by: Grissess MacWookie  0000001 6:66 AM'])
 disp([' ']);
 
-%% Process data
+%% Process data [Done]
 
 dataA = load ( 'dataA.txt' );
 %dataA = xlsread('STAT383_Project_data.xlsx',1,'B2:B21');
@@ -39,7 +39,7 @@ dataB = load ( 'dataB.txt' );
 %dataB = xlsread('STAT383_Project_data.xlsx',1,'D2:D101');
 Nb = size(dataB,1);
 
-%% Plot the data (dataA)
+%% Plot the data (dataA) [Done]
 
 % (Box plot) For the key parts of the plot, see figure 6.24 in textbook
 
@@ -48,7 +48,7 @@ figure('name','Boxplot for DataA');boxplot(dataA);title ('Boxplot for DataA');yl
 % (Histogram)
 figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');ylabel('Frequency');xlabel('ohms')
 
-%% Questions
+%% Questions [NOT DONE]
 
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
@@ -57,7 +57,7 @@ fprintf(['The Data Set, A, is [insert thing here] skewed \n ', ...
     'because [description]']);
 
 disp([' '])
-%% Plot the data (dataB)
+%% Plot the data (dataB)[Done]
 
 % (Box plot) For the key parts of the plot, see figure 6.24
 figure('name','Boxplot for DataB');boxplot(dataB);title ('Boxplot for DataA');ylabel('ohms')
@@ -66,7 +66,7 @@ figure('name','Boxplot for DataB');boxplot(dataB);title ('Boxplot for DataA');yl
 figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');ylabel('Frequency');xlabel('ohms')
 
 
-%% Questions
+%% Questions [NOT DONE]
 
 %Is the data skewed? Why or why not.. Use your plots to support your
 %analysis. HINT: Read 6.2 and 6.3 carefully.
@@ -75,6 +75,7 @@ fprintf(['The Data Set, B, is [insert thing here] skewed \n ', ...
     'because [description]']);
 
 disp([' '])
+
 %% Sample Analysis
 % For each data set, calculate the sample mean, mode, median and sample
 % standard deviation. The median you can get from the box plot or the MatLab
@@ -82,6 +83,9 @@ disp([' '])
 % command "mode(data)". However, the sample mean and sample standard
 % deviation MUST be calculated using the formulas from the book, i.e.
 % do not use software commands like "mean(X)" but you can still use "sum".
+
+meanA = sum(dataA)/Na;
+meanB = sum(dataB)/Nb;
 
 
 
@@ -99,9 +103,6 @@ disp([' '])
 %  (Display it in the same format as the instructions sheet.)
 
 disp([' '])
-
-meanA = sum(dataA)/Na;
-meanB = sum(dataB)/Nb;
 
 diffA = dataA - meanA;
 diffB = dataB - meanB;
