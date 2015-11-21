@@ -53,7 +53,7 @@ figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');y
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
 
-fprintf(['The Data Set, A, is normal (Bellshaped) \n ', ...
+fprintf(['The Data Set, A, is Bimodal \n ', ...
     'because [description]']);
 
 disp([' '])
