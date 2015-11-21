@@ -112,15 +112,15 @@ varB = (sum(diffB.^2))/(Nb-1);
 stdDevA = sqrt((sum(diffA.^2))/(Na-1));
 stdDevB = sqrt((sum(diffB.^2))/(Nb-1));
 
-sStdDevA = sqrt((sum(diffA.^2))/(Na));
-sStdDevB = sqrt((sum(diffB.^2))/(Nb));
+sampleStdDevA = sqrt((sum(diffA.^2))/(Na));
+sampleStdDevB = sqrt((sum(diffB.^2))/(Nb));
 
 % For confidence level 95% for dataA
 
 t95A = tinv(.95,Na-1);
-lower95A = meanA-(t95A*(sStdDevA/Na));
+lower95A = meanA-(t95A*(sampleStdDevA/Na));
 
-upper95A = meanA+(t95A*(sStdDevA/Na));
+upper95A = meanA+(t95A*(sampleStdDevA/Na));
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set A, is (' num2str(lower95A) ', ' num2str(upper95A) ')']);
 
@@ -128,9 +128,9 @@ disp([' '])
 % For confidence level 95% for dataB
 
 t95B = tinv(.95,Nb-1);
-lower95B = meanB-(t95B*(sStdDevB/Nb));
+lower95B = meanB-(t95B*(sampleStdDevB/Nb));
 
-upper95B = meanB+(t95B*(sStdDevB/Nb));
+upper95B = meanB+(t95B*(sampleStdDevB/Nb));
 
 disp(['The two-sided, 95% confidence interval for the sample mean of data set B, is (' num2str(lower95B) ', ' num2str(upper95B) ')']);
 
@@ -138,9 +138,9 @@ disp([' '])
 % For confidence level 99% for dataA
 
 t99A = tinv(.99,Na-1);
-lower99A = meanA-(t99A*(sStdDevA/Na));
+lower99A = meanA-(t99A*(sampleStdDevA/Na));
 
-upper99A = meanA+(t99A*(sStdDevA/Na));
+upper99A = meanA+(t99A*(sampleStdDevA/Na));
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set A, is (' num2str(lower99A) ', ' num2str(upper99A) ')']);
 
@@ -148,9 +148,9 @@ disp([' '])
 % For confidence level 99% for dataB
 
 t99B = tinv(.99,Nb-1);
-lower99B = meanB-(t95B*(sStdDevB/Nb));
+lower99B = meanB-(t95B*(sampleStdDevB/Nb));
 
-upper99B = meanB+(t99B*(sStdDevB/Nb));
+upper99B = meanB+(t99B*(sampleStdDevB/Nb));
 
 disp(['The two-sided, 99% confidence interval for the sample mean of data set B, is (' num2str(lower99B) ', ' num2str(upper99B) ')']);
 
@@ -193,14 +193,14 @@ disp([' ']);
 %% Calculate and display the p-value for ...
 
 % For the two-sided problem for data A with null hypothesis H0: mu_A = 98.25
-tstarA = (((meanA - 98.25)*(sqrt(Na))/(sStdDevA)));
+tstarA = (((meanA - 98.25)*(sqrt(Na))/(sampleStdDevA)));
 
-disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanA,sStdDevA)))]);
+disp(['For H0: mu_A = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanA,sampleStdDevA)))]);
 
 % For the two-sided problem for data B with null hypothesis H0: mu_B = 98.25
-tstarB = (((meanB - 98.25)*sqrt(Nb))/(sStdDevB));
+tstarB = (((meanB - 98.25)*sqrt(Nb))/(sampleStdDevB));
 
-disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanB,sStdDevB)))]);
+disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('normal',98.25,meanB,sampleStdDevB)))]);
 
 disp([' ']);
 %% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why?
