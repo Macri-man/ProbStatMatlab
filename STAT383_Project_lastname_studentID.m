@@ -26,7 +26,7 @@ format compact
 
 disp('Code by: Alexander Macri  0384086 8:00 AM')
 disp('Code by: Adam Kimball     0386149 8:00 AM')
-disp('Code by: Grissess MacWookie  0000001 6:66 AM')
+disp('Code by: Graham Northup   0358388 8:00 AM')
 disp(' ');
 
 %% Process data [Done]
@@ -53,11 +53,11 @@ figure('name','Histogram for DataA');hist(dataA);title ('Histogram for DataA');y
 % Is the data skewed? Why or why not. Use your plots to support your
 % analysis. HINT: Read 6.2 and 6.3 carefully.
 
-disp(['The data in the first data set, A, seems to be Bimodal. \n' ... 
+fprintf(['The data in the first data set, A, seems to be Bimodal. \n' ... 
     'This is illustrated by the fact that the box plot indicates a very symmetric relationship to either side of the median line\n' ... 
     '(from min to q1 and q3 to max, as well as q1 to median and median to q3),\n' ...
     'in addition to the histogram, visually, having two apparent distinct distribution curves, which is indicative of bimodality.']);
-disp('\n\n');
+fprintf('\n\n');
 
 %% Plot the data (dataB)[Done]
 
@@ -73,10 +73,10 @@ figure('name','Histogram for DataB');hist(dataB);title ('Histogram for DataB');y
 %Is the data skewed? Why or why not.. Use your plots to support your
 %analysis. HINT: Read 6.2 and 6.3 carefully.
 
-disp(['The data in the second data set, B, seems to be positively skewed. \n' ... 
+fprintf(['The data in the second data set, B, seems to be positively skewed. \n' ... 
     'This is illustrated by the fact that in the boxplot, the length of the horizontal line from the median to Q3 is much longer than from Q1 to the median.\n' ...
     'This is also illustrated by the histogram, visually, having a long tail to the right, which is indicative of a positive skew.']);
-disp('\n\n');
+fprintf('\n\n');
 
 %% Sample Analysis [DONE]
 % For each data set, calculate the sample mean, mode, median and sample
@@ -121,6 +121,8 @@ disp(' ');
 %
 %                   tinv(1-alpha,v)
 %
+
+
 %% Calculate and display TWO-sided "t" confidence intervals for the sample mean of dataA and dataB that you calculated above for... [DONE]
 %  (Display it in the same format as the instructions sheet.)
 
@@ -130,7 +132,10 @@ disp(' ')
 sovernA = sampleStdDevA/sqrt(Na);
 sovernB = sampleStdDevB/sqrt(Nb);
 
-t95A = tinv(.95,Na-1);
+alpha95=1-((1-.95)/2);
+alpha99=1-((1-.99)/2);
+
+t95A = tinv(alpha95,Na-1);
 lower95A = meanA-(t95A*sovernA);
 
 upper95A = meanA+(t95A*sovernA);
@@ -140,7 +145,7 @@ disp(' ')
 
 % For confidence level 95% for dataB
 
-t95B = tinv(.95,Nb-1);
+t95B = tinv(alpha95,Nb-1);
 lower95B = meanB-(t95B*sovernB);
 
 upper95B = meanB+(t95B*sovernB);
@@ -150,7 +155,7 @@ disp(' ')
 
 % For confidence level 99% for dataA
 
-t99A = tinv(.99,Na-1);
+t99A = tinv(alpha99,Na-1);
 lower99A = meanA-(t99A*sovernA);
 
 upper99A = meanA+(t99A*sovernA);
@@ -160,7 +165,7 @@ disp(' ')
 
 % For confidence level 99% for dataB
 
-t99B = tinv(.99,Nb-1);
+t99B = tinv(alpha99,Nb-1);
 lower99B = meanB-(t99B*sovernB);
 
 upper99B = meanB+(t99B*sovernB);
@@ -261,8 +266,8 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarA
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
-disp('and therefore with a significance level of 5%, we [do something] the null.');
+disp(['is less than the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ');
 %% Un-paired (independent) two-sided t-test: [NOT DONE]
 % Imagine that "dataA" is using the standard machine to make resistors,
@@ -280,10 +285,10 @@ dataD = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91;
 Nd = size(dataD,1);
 
 meanA = sum(dataA)/Na;
-meanD = (sum(dataD)/Nd);
+meanD = sum(dataD)/Nd;
 
-VarA = sum(dataA - meanA)^2/(Na-1);
-VarD = sum(dataD - meanD)^2/(Nd-1);
+VarA = (sum((dataA - meanA).^2))/(Na-1);
+VarD = (sum((dataD - meanD).^2))/(Nd-1);
 
 numor = meanA-meanD-0;
 denom = sqrt((VarA/Na)+(VarD/Nd));
@@ -299,8 +304,8 @@ disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',1-0
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAD)]);
-disp(['[is whatever than] the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
-disp('and therefore with a significance level of 5%, we [do something] the null.');
+disp(['is less than the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ')
 %%                  Fitting a Line (paramter estimation) [NOT DONE]
 %
