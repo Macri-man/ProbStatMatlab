@@ -24,9 +24,9 @@ close all
 
 format compact
 
-disp('Code by: Alexander Macri  0384086 8:00 AM')
-disp('Code by: Adam Kimball     0386149 8:00 AM')
-disp('Code by: Graham Northup   0358388 8:00 AM')
+disp('Code by: Alexander Macri  0384086 03')
+disp('Code by: Adam Kimball     0386149 03')
+disp('Code by: Graham Northup   0358388 03')
 disp(' ');
 
 %% Process data [Done]
@@ -230,13 +230,13 @@ disp(' ');
 %  instructions sheet example). Hint: See figure 8.30 in book.
 
 disp(['The absolute value of the t statistic for dataA ' num2str(abs(tstarA))]);
-disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Na-1)) ]);
+disp(['is greater than the critical value, ' num2str(2*(1-cdf('t',tstarA,Na-1))) ]);
 disp('and therefore with a significance level of 5%, we REJECT the null.');
 
 disp(' ');
 
 disp(['The absolute value of the t statistic for dataB ' num2str(abs(tstarB))]);
-disp(['is greater than the critical value, ' num2str(cdf('t',(1-0.05)/2,Nb-1)) ]);
+disp(['is greater than the critical value, ' num2str(2*(1-cdf('t',tstarB,Nb-1))) ]);
 disp('and therefore with a significance level of 5%, we REJECT the null.');
 disp(' ');
 %% Paired, two sided t-test: [NOT DONE]
@@ -266,7 +266,7 @@ disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarA
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
-disp(['is less than the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp(['is less than the critical value, ' num2str(2*(1-cdf('t',tstarAC,Na-1))) ]);
 disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ');
 %% Un-paired (independent) two-sided t-test: [NOT DONE]
@@ -290,12 +290,14 @@ meanD = sum(dataD)/Nd;
 VarA = (sum((dataA - meanA).^2))/(Na-1);
 VarD = (sum((dataD - meanD).^2))/(Nd-1);
 
+v = ((VarA^2/Na)+(VarD^2/Nd))/(((VarA^4)/(Na^2*(Na-1)))+((VarD^4)/(Nd^2*(Nd-1))));
+
 numor = meanA-meanD-0;
-denom = sqrt((VarA/Na)+(VarD/Nd));
+denom = sqrt((VarA^2/Na)+(VarD^2/Nd));
 
 tstarAD = numor/denom;
 
-disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',1-0.05,Nd-1)))])
+disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',tstarAD,Nd-1)))])
 
 %% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [NOT DONE]
 % 
@@ -304,7 +306,7 @@ disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',1-0
 %  instructions sheet example).
 
 disp(['The absolute value of the t statistic ' num2str(tstarAD)]);
-disp(['is less than the critical value, ' num2str(cdf('t',1-0.05,Nb-1)) ]);
+disp(['is less than the critical value, ' num2str(2*(1-cdf('t',tstarAD,Nd-1))) ]);
 disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ')
 %%                  Fitting a Line (paramter estimation) [NOT DONE]
@@ -344,6 +346,9 @@ sumYsquared = sum(dataY.^2);
 
 sumYA = sum(dataA.*dataY);
 
+B1 = sumYA/sumAsquared;
+B0 = (sum(dataY)/size(dataY,1))-(B1*(sum(dataA)/size(dataA,1)));
+
 MMnumor = ((Na * sumYA) - (sumA * sumY));
 MMdenom = (Na*sumAsquared) - sum(dataA)^2;
 
@@ -368,7 +373,8 @@ disp(['~B0 = ' num2str(BB)]);
 % title('Best Linear Fit')
 % 
 
-Fit2=MM*dataA + BB;    
+%Fit2=MM*dataA + BB; 
+Fit2=B1*dataA+B0;
 %This is my fit line. MM and BB are estimates for slope and intercpet.
 
 figure('name','This is my fit line. MM and BB are estimates for slope and intercpet');plot(dataA,dataY,'b.',dataA,Fit2,'r-');
