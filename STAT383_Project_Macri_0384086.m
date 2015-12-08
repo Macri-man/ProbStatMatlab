@@ -24,9 +24,9 @@ close all
 
 format compact
 
-disp('Code by: Alexander Macri  0384086 03')
-disp('Code by: Adam Kimball     0386149 03')
-disp('Code by: Graham Northup   0358388 03')
+disp('Code by: Alexander Macri  0384086 8:00 AM')
+disp('Code by: Adam Kimball     0386149 8:00 AM')
+disp('Code by: Graham Northup   0358388 8:00 AM')
 disp(' ');
 
 %% Process data [Done]
