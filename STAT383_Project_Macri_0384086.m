@@ -111,7 +111,7 @@ disp(['The median is ' num2str(median(dataB))]);
 disp(['The sample standard deviation is ' num2str(sampleStdDevB)]);
 disp(' ');
 
-%% Confidence Intervals [NOT DONE]
+%% Confidence Intervals [DONE]
 % For this part, it will be useful to use the MatLab function "tinv". This
 % will calculate the critical value for a random variable with a student-t
 % distribution given v, which is the degrees of freedom.
@@ -222,7 +222,7 @@ tstarB = (((meanB - 98.25)*sqrt(Nb))/(sampleStdDevB));
 disp(['For H0: mu_B = 98.25, the p-value = ' num2str(2*(1-cdf('t',tstarB,Nb-1)))]);
 disp(' ');
 
-%% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why? [NOT DONE]
+%% QUESTION - Assume a significance level of 5%, should you reject the null hypothesis in either case now? Why? [DONE]
 % When you answer this below, include your calculated p-value in addtion to the t statistic.
 % Do this for both dataA and dataB.
 %
@@ -248,7 +248,7 @@ disp(' ');
 
 dataC = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91];
 
-%% Calculate and display the p-value for ... [NOT DONE]
+%% Calculate and display the p-value for ... [DONE]
 
 % For the two-sided problem with null hypothesis H0: muA - muC = 0
 
@@ -259,7 +259,7 @@ tstarAC = ((dAC-0)*(sqrt(Na)))/(sdAC);
 
 disp(['For H0: muA - muC = 0, the paired p-value = ' num2str(2*(1-cdf('t',tstarAC,Na-1)))])
 
-%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)? [NOT DONE]
+%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the methods (reject)? [DONE]
 % 
 %
 %  (Display your answer in the command window as before (same format as the
@@ -269,7 +269,7 @@ disp(['The absolute value of the t statistic ' num2str(tstarAC)]);
 disp(['is less than the critical value, ' num2str(2*(1-cdf('t',tstarAC,Na-1))) ]);
 disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ');
-%% Un-paired (independent) two-sided t-test: [NOT DONE]
+%% Un-paired (independent) two-sided t-test: [DONE]
 % Imagine that "dataA" is using the standard machine to make resistors,
 % while a new machine that is cheaper is being used to to create the data
 % below (dataD).
@@ -278,7 +278,7 @@ disp(' ');
 
 dataD = [103;99;107;101;96;99;101;95;97;101;99;98;101;101;105;103;103;104;98;91;95;97;101;99;98;101];
 
-%% Calculate and display the p-value for (do NOT assume a pooled variance) ... [NOT DONE]
+%% Calculate and display the p-value for (do NOT assume a pooled variance) ... [DONE]
 
 % For the two-sided problem with null hypothesis H0: muA - muD = 0
 
@@ -299,7 +299,7 @@ tstarAD = numor/denom;
 
 disp(['For H0: muA - muD = 0, the un-paired p-value = ' num2str(2*(1-cdf('t',tstarAD,Nd-1)))])
 
-%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [NOT DONE]
+%% QUESTION - Assume a significance level of 5%, would you say that there is a significant difference between the machines (reject)? [DONE]
 % 
 %
 %  (Display your answer in the command window as before (same format as the
@@ -309,7 +309,7 @@ disp(['The absolute value of the t statistic ' num2str(tstarAD)]);
 disp(['is less than the critical value, ' num2str(2*(1-cdf('t',tstarAD,Nd-1))) ]);
 disp('and therefore with a significance level of 5%, we ACCEPT the null.');
 disp(' ')
-%%                  Fitting a Line (paramter estimation) [NOT DONE]
+%%                  Fitting a Line (paramter estimation) [DONE]
 %
 % The manager of the resistor plant wishes to investigate how the plant's
 % electricity usage depends upon the value of the resistor produced.
